@@ -34,14 +34,15 @@ void InOrder(Node *root)
 }
 bool search(Node *root,int data)
 {
-	if(root!=NULL){
-		if(root->data ==data)
-			return true;
-		else{
-			return search(root->left,data) || search(root->right,data);
-		}
-	}
+	if(root == NULL)
+		return NULL;
+	else if(root->data > data)
+		return search(root->left,data);
+	else if(root->data<data) 
+		return search(root->right,data);
+	else return root;
 }
+
 int findElementInTreeRecursive(struct binaryTreeNode * root, int num)
 {
     // A variable for root value
