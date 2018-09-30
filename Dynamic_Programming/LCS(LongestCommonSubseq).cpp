@@ -26,8 +26,37 @@ int l_cs(char A[],char B[],int m,int n)
 				a[i][j] = max(a[i-1][j],a[i][j-1]);
 		}
 	}
+	//print LCS
+	int index = a[m][n];
+	
+	// Create a character array to store the lcs string 
+   	char lcs[index]; 
+   
+	int i = m, j = n; 
+   	while (i > 0 && j > 0) 
+   	{ 
+      	// If current character in X[] and Y are same, then 
+      	// current character is part of LCS 
+      	if (A[i-1] == B[j-1]) 
+      	{ 
+          lcs[index-1] = A[i-1]; // Put current character in result 
+          i--; j--; index--;     // reduce values of i, j and index 
+      	} 
+  
+      	// If not same, then find the larger of two and 
+     	// go in the direction of larger value 
+      	else if (a[i-1][j] > a[i][j-1]) 
+         	i--; 
+    	else
+        	j--; 
+   	} 
+  
+   	// Print the lcs 
+   	cout << "LCS of " << A << " and " << B << " is " << lcs; 
+   	cout<<endl;
 	return a[m][n];
 }
+
 int main()
 {
 	char A[]="aggtab";
