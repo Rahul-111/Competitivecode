@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    long long int s=0;
+    vector<int > v(n+1,0);
+    
+    for(int i=0;i<n;i++) cin>>v[i],s+=v[i];
+    
+    if(s&1)
+    {
+        cout<<"NO"<<endl;//if number is 
+    }
+    //map<int , int > first,second;
+    unodered_map<int ,int > first,second;
+    first[v[0]]=1;
+    for(int i=1;i<n;i++)
+    second[v[i]]++;
+    
+    long long sd=0;
+    for(int i=0;i<n;i++)
+    {
+        sd+=v[i];    //sum of first i numbers
+        if(sd==s/2)
+            cout<<"YES\n";
+        if(sd < s/2)
+        {
+            long long x=s/2-sd;
+            if(second[x]>0)
+                cout<<"YES\n";
+        }
+        else{
+            long long y=sd-s/2;
+            if(first[y]>0)
+            {
+                cout<<"YES\n";
+            }
+        }
+        first[v[i+1]]++;
+        second[v[i+1]]--;
+    }
+    cout<<"NO\n"
+    return 0;
+}
