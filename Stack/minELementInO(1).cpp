@@ -43,6 +43,21 @@ class Stack{
 			}
 			return y;
 		}
+		int pop(){
+			//output of pop should be correct
+    			if(s.empty())
+        			return -1;
+    			int k;
+    			if(s.top()<minEle){ 
+        			int m=minEle;
+        			minEle=2*minEle-s.top();
+        			k=m;
+    			}
+    			else
+    			k=s.top();
+    			s.pop();
+    			return k;
+		}
 		int getMin(){
 			if(s.size()==0){
 				return -1;
