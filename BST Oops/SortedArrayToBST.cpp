@@ -193,6 +193,43 @@ class BST{
 					
 					root= bstFromSortedArray(a,start,end);
 				}
+				int minimum(BinaryTreeNode<int>* root){
+					if(root==NULL){
+						return INT_MAX;	
+					}
+					
+					return min(root->data,min(minimum(root->left),minimum(root->right)));
+				}
+				int maximum(BinaryTreeNode<int> *root){
+					if(root==NULL){
+						return INT_MIN;
+					}
+					return max(root->data,max(maximum(root->left),maximum(root->right)));
+				}
+				bool isBST(BinaryTreeNode<int> *root){
+					if(root==NULL)
+						return true;
+					int leftmax=maximum(root->left);
+					int rightmin=minimum(root->right);
+					
+					return (root->data >leftmax) && (root->data<=rightmin) && isBST(root->left) && isBST(root->right);
+				}
+				bool isbst(){
+					return isBST(root);
+				}
+				bool isBST3(BinaryTreeNode<int>* root,int min=INT_MIN,int max=INT_MAX){
+					if(root==NULL)
+						return true;
+					if(root->data <min || root->data > max)
+						return false;
+					bool isLeftOk=isBST3(root->left,min,root->data-1);
+					bool isRightOk=isBST3(root->right,root->data+1,max);
+					
+					return isLeftOk && isRightOk;
+				}
+				bool isbst3(){
+					return isBST3(root);
+				}
 };
 int main(){
 	int a[]={10,20,30,40,50,60,70};
@@ -201,6 +238,11 @@ int main(){
 	BST b1;
 	b1.bstFromSortA(a,0,n-1);
 	b1.print();
+	if(b1.isbst3()){
+		cout<<"Yes"<<endl;
+	}
+	else{
+		cout<<"No"<<endl;
+	}
 	return 0;
 }
-
